@@ -1,0 +1,1 @@
+A full-stack Airbnb UI clone built using Node.js, Express, EJS, and standard frontend technologies. This project replicates the look & feel of the Airbnb platform with routing, dynamic views, and modular backend structure.
