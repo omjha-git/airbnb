@@ -1,7 +1,7 @@
 // routes/fixproject.js
 const mongoose = require("mongoose");
 const Listing = require("./models/listing");  // .. because we're inside routes/
-const User = require("../MODEL/user");       // adjust name if your file is different
+const User = require("../models/user");       // adjust name if your file is different
 
 (async () => {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");

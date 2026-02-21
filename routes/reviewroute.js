@@ -5,7 +5,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { reviewSchema } = require("../views/schema");
 const Listing = require("./models/listing");
-const Review = require("../MODEL/review");
+const Review = require("../models/review");
 const { isLoggedIn } = require("./middleware");
 const reviewcontroller = require("../controller/review");
 // Joi validation middleware

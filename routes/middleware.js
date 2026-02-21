@@ -1,6 +1,6 @@
 
 const Listing = require("./models/listing");
-const Review = require("../MODEL/review"); // make sure this line exists
+const Review = require("../models/review"); // make sure this line exists
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
