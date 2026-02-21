@@ -1,0 +1,119 @@
+<% layout('layout/boilerplate') -%>
+
+<h3 class="mb-4">Create listing</h3>
+
+<form method="POST"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data">
+
+  <!-- TITLE -->
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      name="listing[title]"
+      id="title"
+      placeholder="enter title"
+      class="form-control"
+      required
+    >
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+      please fill!
+    </div>
+  </div>
+
+  <!-- PRICE + COUNTRY -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="number"
+        name="listing[price]"
+        id="price"
+        placeholder="enter price"
+        class="form-control"
+        required
+      >
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        please fill!
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="country" class="form-label">Country</label>
+      <input
+        type="text"
+        name="listing[country]"
+        id="country"
+        placeholder="enter country"
+        class="form-control"
+        required
+      >
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        please fill!
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE URL -->
+  <div class="mb-3">
+    <label for="image" class="form-label">Image URL</label>
+    <input
+      type="file"
+      name="image"  
+      id="image"
+      placeholder="https://example.com/image.jpg"
+      class="form-control"
+    >
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      name="listing[description]"
+      id="description"
+      placeholder="description"
+      class="form-control"
+      required
+    ></textarea>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+      please fill!
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="mb-3">
+    <label for="location" class="form-label">Location</label>
+    <input
+      type="text"
+      name="listing[location]"
+      id="location"
+      placeholder="enter location"
+      class="form-control"
+      required
+    >
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+      please fill!
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-dark add-btn">Create</button>
+</form>

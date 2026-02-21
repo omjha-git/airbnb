@@ -1,0 +1,128 @@
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-brands fa-airbnb"></i>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- left side -->
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- centered search (desktop) -->
+      <div class="navbar-center d-none d-lg-block">
+        <form class="air-search d-flex align-items-center" id="navSearchForm">
+          <i class="fa-solid fa-magnifying-glass air-search-icon"></i>
+          <input
+            class="air-search-input"
+            type="search"
+            id="navSearchInput"
+            placeholder="Search (e.g. mountain)"
+            aria-label="Search"
+          >
+        </form>
+      </div>
+
+      <!-- right side -->
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Become our host</a>
+        <% if(!currUser) { %>
+          <a class="nav-link active" aria-current="page" href="/login"><b>login</b></a>
+          <a class="nav-link" href="/signup"><b>signup</b></a>
+        <% } %>
+        <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><b>logout</b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* center the search in navbar */
+  .navbar {
+    position: relative;
+  }
+
+  .navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Airbnb-style search pill */
+  .air-search {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    padding: 6px 14px;
+    min-width: 270px;
+    max-width: 360px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  }
+
+  .air-search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .air-search-input::placeholder {
+    color: #717171;
+  }
+
+  .air-search-icon {
+    color: #ff385c;
+    margin-right: 8px;
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  const searchForm = document.getElementById("navSearchForm");
+  const searchInput = document.getElementById("navSearchInput");
+
+  if (searchForm && searchInput) {
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const raw = searchInput.value.trim().toLowerCase();
+      if (!raw) return;
+
+      const map = {
+        trending: "trending",
+        mountain: "mountain",
+        mountains: "mountain",
+        beach: "beach",
+        beaches: "beach",
+        forest: "forest",
+        lake: "lake",
+        city: "city",
+        snow: "snow",
+        camping: "camping",
+        camp: "camping",
+        boat: "boats",
+        boats: "boats",
+        home: "homes",
+        homes: "homes",
+        luxury: "luxury",
+        village: "village"
+      };
+
+      const slug = map[raw];
+      if (slug) {
+        window.location.href = "/listings/category/" + slug;
+      } else {
+        window.location.href = "/listings";
+      }
+    });
+  }
+</script>
