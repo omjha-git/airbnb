@@ -1,6 +1,6 @@
 // routes/fixproject.js
 const mongoose = require("mongoose");
-const Listing = require("../MODEL/LISTING");  // .. because we're inside routes/
+const Listing = require("./models/listing");  // .. because we're inside routes/
 const User = require("../MODEL/user");       // adjust name if your file is different
 
 (async () => {

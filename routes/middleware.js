@@ -1,5 +1,5 @@
 
-const Listing = require("../MODEL/LISTING");
+const Listing = require("./models/listing");
 const Review = require("../MODEL/review"); // make sure this line exists
 
 module.exports.isLoggedIn = (req, res, next) => {

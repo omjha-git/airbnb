@@ -1,7 +1,7 @@
 // init/index.js
 
 const mongoose = require("mongoose");
-const Listing = require("../MODEL/LISTING.js");
+const Listing = require("./models/listing");
 const User = require("../MODEL/user.js");
 const initData = require("./data.js");
 

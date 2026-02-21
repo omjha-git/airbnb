@@ -1,4 +1,4 @@
-const Listing = require("../MODEL/LISTING");
+const Listing = require("./models/listing");
 const Review = require("../MODEL/review");
 const reviewcontroller = require("../controller/review");
 

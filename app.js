@@ -18,8 +18,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const MongoStore = require("connect-mongo");
 
-const Listing = require("./MODEL/LISTING");
-const User = require("./MODEL/user");
+const Listing = require("./models/listing");
+const User = require("./models/user");
 
 const listingRoutes = require("./routes/listingroute");
 const reviewRoutes = require("./routes/reviewroute");
