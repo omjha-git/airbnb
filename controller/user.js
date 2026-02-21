@@ -1,4 +1,4 @@
-const User = require("../MODEL/user");
+const User = require("../models/user");
 
 // show signup form
 module.exports.showsignup = (req, res) => {
