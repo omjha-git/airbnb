@@ -38,7 +38,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // ====== BASIC SETUP ======
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // view engine + layouts
 app.engine("ejs", engine);
