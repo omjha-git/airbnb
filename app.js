@@ -1,5 +1,3 @@
-// app.js
-
 const express = require("express");
 
 if (process.env.NODE_ENV !== "production") {
@@ -50,11 +48,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+// ====== FAVICON SUPPRESSOR (fixes Render 404 logs) ======
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // ====== SESSION STORE (Mongo) ======
 const store = MongoStore.create({
   mongoUrl: dburl,
   crypto: {
-    secret: process.env.secreat,
+    secret: process.env.SECRET,  // Fixed casing consistency
   },
   touchAfter: 24 * 3600, // seconds
 });
@@ -66,13 +67,14 @@ store.on("error", (err) => {
 // ====== SESSION + FLASH ======
 const sessionOptions = {
   store,
-  secret: process.env.secreat,
+  secret: process.env.SECRET,  // Fixed casing
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production'  // HTTPS only in prod
   },
 };
 
@@ -106,7 +108,6 @@ app.use((req, res, next) => {
 });
 
 // ====== ROUTES ======
-
 // listings routes mounted at /listings
 app.use("/listings", listingRoutes);
 
@@ -138,18 +139,18 @@ app.get(
 // ROOT
 app.get("/", (req, res) => res.redirect("/listings"));
 
-// 404 handler (keep last before error handler)
+// ====== 404 HANDLER (no ExpressError throw - renders directly) ======
 app.use((req, res, next) => {
-  console.log("No route matched:", req.method, req.originalUrl);
-  next(new ExpressError(404, "page not found"));
+  console.log("No route matched:", req.method, req.originalUrl);  // Debug log (remove in prod if desired)
+  res.status(404).render("error", { message: "Page not found" });
 });
 
-// error handler
+// ====== ERROR HANDLER (for real errors only) ======
 app.use((err, req, res, next) => {
   console.error(err);
   const { statusCode = 500 } = err;
-  const message = err.message || "something is wrong";
-  res.status(statusCode).render("error.ejs", { message });
+  const message = err.message || "Something went wrong";
+  res.status(statusCode).render("error", { message });
 });
 
 // START SERVER
