@@ -2,19 +2,23 @@
 const Listing = require("../models/listing");
 const ExpressError = require("../utils/ExpressError");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+
+// All listings
 module.exports.index = async (req, res) => {
   const allListings = await Listing.find({});
   res.render("listings/index", { allListings });
 };
 
+// New form
 module.exports.rendernewform = (req, res) => {
   res.render("listings/new");
 };
 
+// Create listing
 module.exports.create = async (req, res) => {
-
   // 1️⃣ Get coordinates from Mapbox
   const geoResponse = await geocodingClient
     .forwardGeocode({
@@ -39,7 +43,7 @@ module.exports.create = async (req, res) => {
   if (req.file) {
     newListing.image = {
       url: req.file.path,
-      filename: req.file.filename
+      filename: req.file.filename,
     };
   }
 
@@ -49,7 +53,7 @@ module.exports.create = async (req, res) => {
   res.redirect(`/listings/${newListing._id}`);
 };
 
-
+// Show single listing
 module.exports.get = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id)
@@ -60,9 +64,12 @@ module.exports.get = async (req, res) => {
     req.flash("error", "Listing does not exist");
     return res.redirect("/listings");
   }
-  res.render("listings/show", { listing });
+
+  // ✅ Pass mapToken to the view so Mapbox can work in browser
+  res.render("listings/show", { listing, mapToken: process.env.MAP_TOKEN });
 };
 
+// Update listing
 module.exports.update = async (req, res) => {
   const { id } = req.params;
 
@@ -84,8 +91,7 @@ module.exports.update = async (req, res) => {
   res.redirect(`/listings/${listing._id}`);
 };
 
-
-// DELETE LISTING (not reviews)
+// Delete listing
 module.exports.deleteListing = async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndDelete(id);

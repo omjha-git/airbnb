@@ -171,7 +171,7 @@
 
 <script>
   const geometry = <%- JSON.stringify(listing.geometry || null) %>;
-  const maptoken = "<%= process.env.MAP_TOKEN %>";
+  const maptoken = "<%= mapToken %>";  // ✅ from controller
   const listingTitle = <%- JSON.stringify(listing.title) %>;
   const listingLocation = <%- JSON.stringify(listing.location) %>;
 
