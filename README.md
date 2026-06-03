@@ -1,20 +1,4 @@
----
 
-# 🏡 Airbnb Clone — Full Stack Booking Platform
-
-A modern **Airbnb-inspired full-stack web application** built using **Node.js, Express.js, EJS, and modular MVC architecture**.
-This project replicates the core UI/UX of Airbnb while focusing on scalable backend structure, reusable components, and clean routing patterns.
-
-Designed as a production-style learning project to strengthen concepts in:
-
-* Full-stack web development
-* MVC architecture
-* Server-side rendering
-* RESTful routing
-* Scalable folder organization
-* Dynamic templating with EJS
-
----
 
 # ✨ Features
 
